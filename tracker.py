@@ -2,6 +2,7 @@ import psutil
 import time
 from datetime import datetime
 import csv
+from makeEvent import createEventOnCalendar
 # File to log the time intervals
 log_file = "vscode_log.txt"
 
@@ -28,6 +29,9 @@ def is_vscode_running():
 
 def track_vscode():
     vscode_was_running = False
+    start_time = ""
+    end_time = ""
+
     i = 0
     while True:
         print(f"Checking... {i}")
@@ -36,13 +40,20 @@ def track_vscode():
 
         if vscode_running and not vscode_was_running:
             # VS Code just started
-            log_event(datetime.now(),'',"VS Code opened")
+            start_time = datetime.now()
+            log_event(start_time,'',"VS Code opened")
             vscode_was_running = True
 
         elif not vscode_running and vscode_was_running:
             # VS Code just closed
-            log_event('',datetime.now(),"VS Code closed")
+            end_time = datetime.now()
+            log_event('',end_time,"VS Code closed")
             vscode_was_running = False
+            
+            #make an event here
+            createEventOnCalendar(start_time, end_time)
+
+
 
         time.sleep(10)  # Check every 10 seconds to reduce CPU usage
 
