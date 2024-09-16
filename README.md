@@ -14,3 +14,8 @@ Initial Setup:
 Steps to run project:
  - python tracker.py
  - Keep the terminal open for tracking purpose.
+
+A few snapshots:
+![Reading](image/img1.png) \
+![Closed and Event created](image/img2.png) \
+![Calendar Event Formed](image/img3.png)
